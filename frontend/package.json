@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style compressed"
   },
   "author": "Tom Texier",
   "license": "ISC"
