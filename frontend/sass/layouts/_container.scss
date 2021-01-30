@@ -1,0 +1,4 @@
+.container {
+    @include padding-container;
+    min-height: 70vh;
+}
