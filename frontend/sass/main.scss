@@ -14,7 +14,9 @@
 @import "./layouts/header";
 @import "./layouts/footer";
 @import "./layouts/container";
+@import "./layouts/grid-product";
 
 // IMPORTATION DES STYLES DE PAGES
 
-@import "./layouts/grid-product";
+@import "./pages/home";
+@import "./pages/product";

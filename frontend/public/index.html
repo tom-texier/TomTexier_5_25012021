@@ -22,7 +22,7 @@
         <nav>
             <ul>
                 <li>
-                    <a href="./mon-panier.html" id="shopping-cart" title="Mon panier" aria-label="Accéder à mon panier">
+                    <a href="./shopping-cart.html" id="shopping-cart" title="Mon panier" aria-label="Accéder à mon panier">
                         <i class="fas fa-shopping-cart"></i>
                         <span id="number-items">0</span>
                     </a>
@@ -31,7 +31,9 @@
         </nav>
     </header>
 
-    <main class="container">
+    <main class="container home">
+
+        <h1>Découvrez nos caméras vintage</h1>
         
         <section id="product-list"></section>
 
@@ -62,7 +64,6 @@
 
     <script src="../js/main.js"></script>
     <script>
-        var productList = document.getElementById("product-list");
         getAllCameras();
     </script>
 

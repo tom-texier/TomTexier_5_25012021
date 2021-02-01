@@ -1,4 +1,15 @@
 .container {
     @include padding-container;
     min-height: 70vh;
+
+    &.error-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-size: 50px;
+        }
+
+    }
 }
