@@ -112,7 +112,6 @@ setLayoutDetails = async (camera) => {
         });
         btnAdd.classList.add("btn-shopping-cart");
         btnAdd.setAttribute("aria-role", "button");
-        btnAdd.setAttribute("data-idProduct", camera._id);
         btnAdd.innerHTML = '<i class="fas fa-cart-plus"></i> Ajouter au panier';
 
         // Ajout des éléments dans la vue
@@ -151,10 +150,29 @@ else {
 *   Ajouter un produit au panier
 */
 
-addItemToCart = (e) => {
-    
+addItemToCart = () => {
+    let idProduct = location.search.substring(4);
+    shoppingCart.push(idProduct);
+    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
+
+    setNumberProductInCart();
 }
 
 /*
 *   Récupérer le nombre de produit du panier
 */
+
+getNumberProductInCart = () => {
+    return shoppingCart.length;
+}
+
+/*
+*   Mettre à jour le nombre de produit du panier
+*/
+
+setNumberProductInCart = () => {
+    let numberProduct = getNumberProductInCart();
+    
+    const itemShow = document.getElementById("number-items");
+    itemShow.innerText = numberProduct;
+}
