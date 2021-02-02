@@ -3,7 +3,7 @@ header.main-header {
     justify-content: space-between;
     align-items: center;
 
-    padding: 10px 200px;
+    @include padding-container(10px);
 
     box-shadow: 0px 5px 17px 0px rgba(0, 0, 0, 0.07);
 

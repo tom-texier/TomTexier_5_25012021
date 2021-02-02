@@ -1,12 +1,12 @@
-@mixin padding-container {
-    padding: 50px 200px;
+@mixin padding-container($vertical: 50px) {
+    padding: $vertical 200px;
     @media screen and (max-width: 1759px){
-        padding: 50px 150px;
+        padding: $vertical 150px;
     }
     @media screen and (max-width: 1322px){
-        padding: 50px 50px;
+        padding: $vertical 50px;
     }
     @media screen and (max-width: 1112px){
-        padding: 50px 5px;
+        padding: $vertical 5px;
     }
 }
