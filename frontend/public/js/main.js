@@ -1,8 +1,8 @@
 /*
 *   Récupérer toutes les caméras
 */
-getAllCameras = async () => {
-    await fetch('http://localhost:3000/api/cameras')
+getAllCameras = () => {
+    fetch('http://localhost:3000/api/cameras')
         .then(response => response.json())
         .then(response => setLayoutCameras(response))
         .catch(error => alert("Erreur : " + error));
