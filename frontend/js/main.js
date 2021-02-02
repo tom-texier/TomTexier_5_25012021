@@ -132,24 +132,8 @@ priceFormate = (price) => {
 }
 
 /*
-*   Initialisater le panier
-*/
-
-let shoppingCart = JSON.parse(localStorage.getItem("shopping-cart"));
-
-if(localStorage.getItem("shopping-cart")) {
-    console.log(shoppingCart);
-}
-else {
-    console.log("Initialisation du panier");
-    shoppingCart = [];
-    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
-}
-
-/*
 *   Ajouter un produit au panier
 */
-
 addItemToCart = () => {
     let idProduct = location.search.substring(4);
     shoppingCart.push(idProduct);
@@ -161,7 +145,6 @@ addItemToCart = () => {
 /*
 *   Récupérer le nombre de produit du panier
 */
-
 getNumberProductInCart = () => {
     return shoppingCart.length;
 }
@@ -169,10 +152,25 @@ getNumberProductInCart = () => {
 /*
 *   Mettre à jour le nombre de produit du panier
 */
-
 setNumberProductInCart = () => {
     let numberProduct = getNumberProductInCart();
     
     const itemShow = document.getElementById("number-items");
     itemShow.innerText = numberProduct;
 }
+
+/*
+*   Initialisater le panier
+*/
+let shoppingCart = JSON.parse(localStorage.getItem("shopping-cart"));
+
+if(localStorage.getItem("shopping-cart")) {
+    console.log(shoppingCart);
+}
+else {
+    console.log("Initialisation du panier");
+    shoppingCart = [];
+    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
+}
+
+setNumberProductInCart();
