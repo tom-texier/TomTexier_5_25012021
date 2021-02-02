@@ -11,8 +11,9 @@ getAllCameras = () => {
 /*
 *   Mise en page de la liste des caméras
 */
-setLayoutCameras = async (cameras) => {
+setLayoutCameras = (cameras) => {
     const productList = document.getElementById("product-list");
+
     cameras.forEach(camera => {
         let article = document.createElement("article");
         let action = document.createElement("a");
@@ -50,14 +51,14 @@ cutString = (str, max_length) => {
     if(str.length > max_length) {
         new_str += "...";
     }
-     return new_str;
+    return new_str;
 }
 
 /*
 *   Récupérer les détails d'une caméra
 */
-getDetailsOfCamera = async () => {
-    await fetch('http://localhost:3000/api/cameras/' + location.search.substring(4))
+getDetailsOfCamera = () => {
+    fetch('http://localhost:3000/api/cameras/' + location.search.substring(4))
         .then(response => response.json())
         .then(response => setLayoutDetails(response))
         .catch(error => alert("Erreur : " + error));
@@ -66,7 +67,7 @@ getDetailsOfCamera = async () => {
 /*
 *   Mise en page de la vue d'une caméra
 */
-setLayoutDetails = async (camera) => {
+setLayoutDetails = (camera) => {
 
     // Vérification de l'existence d'un produit
     if(Object.keys(camera).length == 0) {
