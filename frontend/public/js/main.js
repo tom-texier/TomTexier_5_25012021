@@ -141,6 +141,16 @@ addItemToCart = () => {
     localStorage.setItem("basket", JSON.stringify(shoppingCart));
 
     setNumberProductInCart();
+
+    let successModal = document.getElementById("success-modal");
+    successModal.classList.add("open");
+
+    setTimeout(
+        () => {
+            successModal.classList.remove("open");
+        },
+        2000
+    );
 }
 
 /*
@@ -175,3 +185,20 @@ else {
 }
 
 setNumberProductInCart();
+
+getProductInCart = (product) => {
+    fetch('http://localhost:3000/api/cameras/' + product)
+        .then(response => response.json())
+        .then(response => setListOfProducts(response))
+        .catch(error => alert("Erreur : " + error));
+}
+
+// setLayoutBasket = () => {
+//     shoppingCart.forEach(product => {
+//         getProductInCart(product);
+//     })
+// }
+
+// setListOfProducts = (camera) => {
+//     console.log(cameras);
+// }

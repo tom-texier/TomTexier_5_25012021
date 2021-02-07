@@ -15,8 +15,10 @@
 @import "./layouts/footer";
 @import "./layouts/container";
 @import "./layouts/grid-product";
+@import "./layouts/success-modal";
 
 // IMPORTATION DES STYLES DE PAGES
 
 @import "./pages/home";
 @import "./pages/product";
+@import "./pages/basket";
