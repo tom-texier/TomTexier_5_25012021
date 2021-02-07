@@ -111,7 +111,7 @@ setLayoutDetails = (camera) => {
             option.innerText = lense;
             productPersonalized.append(option);
         });
-        btnAdd.classList.add("btn-shopping-cart");
+        btnAdd.classList.add("btn-basket");
         btnAdd.setAttribute("aria-role", "button");
         btnAdd.innerHTML = '<i class="fas fa-cart-plus"></i> Ajouter au panier';
 
@@ -138,7 +138,7 @@ priceFormate = (price) => {
 addItemToCart = () => {
     let idProduct = location.search.substring(4);
     shoppingCart.push(idProduct);
-    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
+    localStorage.setItem("basket", JSON.stringify(shoppingCart));
 
     setNumberProductInCart();
 }
@@ -163,15 +163,15 @@ setNumberProductInCart = () => {
 /*
 *   Initialisater le panier
 */
-let shoppingCart = JSON.parse(localStorage.getItem("shopping-cart"));
+let shoppingCart = JSON.parse(localStorage.getItem("basket"));
 
-if(localStorage.getItem("shopping-cart")) {
+if(localStorage.getItem("basket")) {
     console.log(shoppingCart);
 }
 else {
     console.log("Initialisation du panier");
     shoppingCart = [];
-    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
+    localStorage.setItem("basket", JSON.stringify(shoppingCart));
 }
 
 setNumberProductInCart();
