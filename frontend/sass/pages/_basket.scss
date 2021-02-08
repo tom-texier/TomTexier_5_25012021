@@ -1,0 +1,39 @@
+#summary {
+
+    h1 {
+        margin-bottom: 50px;
+        font-size: 25px;
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+        margin-bottom: 20px;
+
+        article {
+            display: flex;
+            color: $font-color;
+
+            img {
+                width: 200px;
+                max-height: 250px;
+                margin-right: 20px;
+            }
+        }
+    }
+}
+
+#total {
+    border-top: 1px solid #d3d3d3;
+    display: flex;
+    justify-content: flex-end;
+
+    h4 {
+        font-size: 30px;
+
+        span {
+            font-weight: 900;
+            font-family: "Poppins", sans-serif;
+        }
+    }
+}

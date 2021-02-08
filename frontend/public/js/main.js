@@ -193,18 +193,52 @@ getProductInCart = (product) => {
         .catch(error => alert("Erreur : " + error));
 }
 
+let totalOrder = 0;
+
 setLayoutBasket = () => {
-    shoppingCart.forEach(product => {
-        getProductInCart(product);
-    })
+    if(shoppingCart.length == 0) {
+        let pageError = document.createElement("h1");
+        document.getElementById("summary").style.display = "none";
+        document.getElementById("total").style.display = "none";
+        document.getElementById("order").style.display = "none";
+        pageError.innerText = "Vous n'avez aucun produit dans votre panier."
+        document.querySelector(".container").append(pageError);
+        document.querySelector(".container").classList.add("error-page");
+    }
+    else {
+        shoppingCart.forEach(product => {
+            getProductInCart(product);
+        });
+    }
 }
+
 
 setListOfProducts = (camera) => {
     const summary = document.getElementById("summary");
 
     let article = document.createElement('article');
+    let action = document.createElement("a");
     let image = document.createElement("img");
+    let rightDetails = document.createElement("div");
     let title = document.createElement("h2");
     let price = document.createElement("p");
     let description = document.createElement("p");
+    description.classList.add("description");
+
+    image.src = camera.imageUrl;
+    title.innerText = camera.name;
+    price.innerText = priceFormate(camera.price);
+    price.classList.add("price");
+    description.innerText = cutString(camera.description, 100);
+    action.setAttribute("href", "./product.html?id=" + camera._id);
+
+    rightDetails.append(title, description, price)
+    article.append(image, rightDetails);
+    action.append(article);
+
+    summary.append(action);
+
+    totalOrder += camera.price;
+
+    document.getElementById("total").getElementsByTagName("span")[0].innerText = priceFormate(totalOrder);
 }
