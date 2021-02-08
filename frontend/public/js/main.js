@@ -193,12 +193,18 @@ getProductInCart = (product) => {
         .catch(error => alert("Erreur : " + error));
 }
 
-// setLayoutBasket = () => {
-//     shoppingCart.forEach(product => {
-//         getProductInCart(product);
-//     })
-// }
+setLayoutBasket = () => {
+    shoppingCart.forEach(product => {
+        getProductInCart(product);
+    })
+}
 
-// setListOfProducts = (camera) => {
-//     console.log(cameras);
-// }
+setListOfProducts = (camera) => {
+    const summary = document.getElementById("summary");
+
+    let article = document.createElement('article');
+    let image = document.createElement("img");
+    let title = document.createElement("h2");
+    let price = document.createElement("p");
+    let description = document.createElement("p");
+}
