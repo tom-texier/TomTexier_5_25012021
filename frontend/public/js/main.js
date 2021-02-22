@@ -304,6 +304,7 @@ validForm = (e) => {
         firstName == ""
     ) {
         document.getElementById("error-message").innerText = "Veuillez entrer un prénom valide.";
+        document.getElementById("error-message").style.display = "block";
     }
     else if(
         checkNumber.test(lastName) == true ||
@@ -311,9 +312,11 @@ validForm = (e) => {
         lastName == ""
     ) {
         document.getElementById("error-message").innerText = "Veuillez entrer un nom valide.";
+        document.getElementById("error-message").style.display = "block";
     }
     else if( address == "" ) {
         document.getElementById("error-message").innerText = "Veuillez entrer une adresse valide.";
+        document.getElementById("error-message").style.display = "block";
     }
     else if(
         checkSpecialCharacter.test(city) == true ||
@@ -321,9 +324,11 @@ validForm = (e) => {
         city == ""
     ) {
         document.getElementById("error-message").innerText = "Veuillez entrer une ville valide.";
+        document.getElementById("error-message").style.display = "block";
     }
     else if( email == "" ) {
         document.getElementById("error-message").innerText = "Veuillez entrer une adresse mail valide.";
+        document.getElementById("error-message").style.display = "block";
     }
     else {
         document.getElementById("error-message").style.display = "none";
@@ -377,6 +382,10 @@ if(document.getElementById('order-form') != null) {
 */
 setLayoutConfirmation = () => {
 
+    if(localStorage.getItem('contact') == null || localStorage.getItem('orderId') == null) {
+        window.location.replace("./index.html");
+    }
+
     let contact = JSON.parse(localStorage.getItem('contact'));
     let orderId = JSON.parse(localStorage.getItem('orderId'));
 
@@ -385,13 +394,15 @@ setLayoutConfirmation = () => {
     let subtitle = document.createElement('h2');
     let texte = document.createElement('p');
 
+    icone.classList.add('icone');
     icone.innerHTML = '<i class="fas fa-check"></i>';
 
     title.innerText = contact.firstName + " " + contact.lastName;
     subtitle.innerText = "L'équipe d'Orinoco vous remercie pour votre commande !";
 
-    texte.innerText = "Votre commande n°" + orderId + " vous sera bientôt envoyée."
+    texte.innerText = "Votre commande n°" + orderId + " vous sera bientôt expédiée. Vous recevrez un e-mail récapitulatif de votre commande dans un délai maximum de 24H."
 
     document.getElementById("confirmation").append(icone, title, subtitle, texte);
 
+    // localStorage.clear();
 }

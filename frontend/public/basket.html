@@ -46,24 +46,24 @@
             <h2>Valider ma commande</h2>
             <form method="POST" id="order-form">
                 <div class="input-group">
-                    <label for="firstName">Prénom</label>
                     <input type="text" id="firstName" name="firstName" required>
+                    <label for="firstName">Prénom</label>
                 </div>
                 <div class="input-group">
-                    <label for="lastName">Nom</label>
                     <input type="text" id="lastName" name="lastName" required>
+                    <label for="lastName">Nom</label>
                 </div>
                 <div class="input-group">
-                    <label for="address">Adresse</label>
                     <input type="text" id="address" name="address" required>
+                    <label for="address">Adresse</label>
                 </div>
                 <div class="input-group">
-                    <label for="city">Ville</label>
                     <input type="text" id="city" name="city" required>
+                    <label for="city">Ville</label>
                 </div>
                 <div class="input-group">
-                    <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" required>
+                    <label for="email">E-mail</label>
                 </div>
                 <div id="error-message"></div>
                 <input type="submit" value="Commander">
@@ -98,6 +98,17 @@
     <script src="./js/main.js"></script>
     <script>
         setLayoutBasket();
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('blur', function (e) {
+                if(this.value != "") {
+                    this.classList.add('active');
+                }
+                else {
+                    this.classList.remove('active');
+                }
+            });
+        })
     </script>
 
 </body>
