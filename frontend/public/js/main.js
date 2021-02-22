@@ -171,7 +171,7 @@ setNumberProductInCart = () => {
 }
 
 /*
-*   Initialisater le panier
+*   Initialiser le panier
 */
 let shoppingCart = JSON.parse(localStorage.getItem("basket"));
 
@@ -184,61 +184,183 @@ else {
     localStorage.setItem("basket", JSON.stringify(shoppingCart));
 }
 
+/*
+*   Initialiser l'affichage du panier
+*/
 setNumberProductInCart();
 
-getProductInCart = (product) => {
+/*
+*   Récupérer les produits du panier
+*/
+getProductInCart = (product, index) => {
     fetch('http://localhost:3000/api/cameras/' + product)
         .then(response => response.json())
-        .then(response => setListOfProducts(response))
+        .then(response => setListOfProducts(response, index))
         .catch(error => alert("Erreur : " + error));
 }
 
-let totalOrder = 0;
-
+/*
+*   Appeler la fonction qui récupère les produits ou afficher une page d'erreur
+*/
 setLayoutBasket = () => {
     if(shoppingCart.length == 0) {
         let pageError = document.createElement("h1");
-        document.getElementById("summary").style.display = "none";
-        document.getElementById("total").style.display = "none";
+        document.querySelector(".basket").style.display = "none";
         document.getElementById("order").style.display = "none";
         pageError.innerText = "Vous n'avez aucun produit dans votre panier."
         document.querySelector(".container").append(pageError);
         document.querySelector(".container").classList.add("error-page");
     }
     else {
-        shoppingCart.forEach(product => {
-            getProductInCart(product);
+        shoppingCart.forEach((product, index) => {
+            getProductInCart(product, index);
         });
     }
 }
 
+/*
+*   Initialiser le montant total de la commande
+*/
+let totalOrder = 0;
 
-setListOfProducts = (camera) => {
+/*
+*   Afficher la liste des produits du panier
+*/
+setListOfProducts = (camera, index) => {
     const summary = document.getElementById("summary");
 
     let article = document.createElement('article');
     let action = document.createElement("a");
+    let containerImage = document.createElement("div");
     let image = document.createElement("img");
+    let trashBtn = document.createElement("a");
     let rightDetails = document.createElement("div");
     let title = document.createElement("h2");
     let price = document.createElement("p");
     let description = document.createElement("p");
-    description.classList.add("description");
 
+    containerImage.classList.add("containerImage");
+    trashBtn.classList.add("trashBtn");
+    trashBtn.setAttribute('data-index', index);
+    trashBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    description.classList.add("description");
     image.src = camera.imageUrl;
     title.innerText = camera.name;
     price.innerText = priceFormate(camera.price);
     price.classList.add("price");
-    description.innerText = cutString(camera.description, 100);
+    description.innerText = cutString(camera.description, 50);
     action.setAttribute("href", "./product.html?id=" + camera._id);
 
-    rightDetails.append(title, description, price)
-    article.append(image, rightDetails);
-    action.append(article);
+    containerImage.append(image, trashBtn);
+    action.append(title);
+    rightDetails.append(containerImage, action, description, price);
+    article.append(rightDetails);
 
-    summary.append(action);
+    summary.append(article);
 
     totalOrder += camera.price;
 
     document.getElementById("total").getElementsByTagName("span")[0].innerText = priceFormate(totalOrder);
+
+    trashBtn.addEventListener("click", removeItemToCart);
 }
+
+/*
+*   Supprimer un produit du panier
+*/
+removeItemToCart = (e) => {
+    if(e.target.hasAttribute('data-index')) {
+        index = e.target.getAttribute('data-index');
+    }
+    else {
+        index = e.target.parentElement.getAttribute('data-index');
+    }
+
+
+    shoppingCart.splice(index, 1);
+    localStorage.setItem("basket", JSON.stringify(shoppingCart));
+
+    window.location.reload();
+}
+
+/*
+*   Validation des champs du formulaire de commande
+*/
+validForm = (e) => {
+    e.preventDefault();
+
+    let checkNumber = /[0-9]/;
+    let checkSpecialCharacter = /[§!@#$%^&*().?":{}|<>]/;
+
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let address = document.getElementById("address").value;
+    let city = document.getElementById("city").value;
+    let email = document.getElementById("email").value;
+
+    if(
+        checkNumber.test(firstName) == true ||
+        checkSpecialCharacter.test(firstName) == true ||
+        firstName == ""
+    ) {
+        document.getElementById("error-message").innerText = "Veuillez entrer un prénom valide.";
+    }
+    else if(
+        checkNumber.test(lastName) == true ||
+        checkSpecialCharacter.test(lastName) == true ||
+        lastName == ""
+    ) {
+        document.getElementById("error-message").innerText = "Veuillez entrer un nom valide.";
+    }
+    else if( address == "" ) {
+        document.getElementById("error-message").innerText = "Veuillez entrer une adresse valide.";
+    }
+    else if(
+        checkSpecialCharacter.test(city) == true ||
+        checkNumber.test(city) == true ||
+        city == ""
+    ) {
+        document.getElementById("error-message").innerText = "Veuillez entrer une ville valide.";
+    }
+    else if( email == "" ) {
+        document.getElementById("error-message").innerText = "Veuillez entrer une adresse mail valide.";
+    }
+    else {
+        document.getElementById("error-message").style.display = "none";
+        let contact = {
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            city: city,
+            email: email
+        };
+        
+        sendForm(contact);
+
+    }
+    
+}
+
+/*
+*   Envoyer le formulaire de commande
+*/
+sendForm = (contact) => {
+    let products = shoppingCart;
+    fetch("http://localhost:3000/api/cameras/order",
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode:'cors',
+        body: JSON.stringify({contact, products})
+    })
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(error => alert("Erreur : " + error));
+}
+
+/*
+*   Initialisation du formulaire de commande
+*/
+document.getElementById('order-form').addEventListener('submit', validForm);
