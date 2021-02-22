@@ -404,5 +404,5 @@ setLayoutConfirmation = () => {
 
     document.getElementById("confirmation").append(icone, title, subtitle, texte);
 
-    // localStorage.clear();
+    localStorage.clear();
 }
