@@ -356,11 +356,42 @@ sendForm = (contact) => {
         body: JSON.stringify({contact, products})
     })
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => {
+        localStorage.setItem('contact', JSON.stringify(response.contact));
+        localStorage.setItem('orderId', JSON.stringify(response.orderId));
+        localStorage.removeItem('basket');
+        window.location.replace("./confirmation.html");
+    })
     .catch(error => alert("Erreur : " + error));
 }
 
 /*
 *   Initialisation du formulaire de commande
 */
-document.getElementById('order-form').addEventListener('submit', validForm);
+if(document.getElementById('order-form') != null) {
+    document.getElementById('order-form').addEventListener('submit', validForm);
+}
+
+/*
+*   Mettre en page la page confirmation
+*/
+setLayoutConfirmation = () => {
+
+    let contact = JSON.parse(localStorage.getItem('contact'));
+    let orderId = JSON.parse(localStorage.getItem('orderId'));
+
+    let icone = document.createElement('div');
+    let title = document.createElement('h1');
+    let subtitle = document.createElement('h2');
+    let texte = document.createElement('p');
+
+    icone.innerHTML = '<i class="fas fa-check"></i>';
+
+    title.innerText = contact.firstName + " " + contact.lastName;
+    subtitle.innerText = "L'équipe d'Orinoco vous remercie pour votre commande !";
+
+    texte.innerText = "Votre commande n°" + orderId + " vous sera bientôt envoyée."
+
+    document.getElementById("confirmation").append(icone, title, subtitle, texte);
+
+}
