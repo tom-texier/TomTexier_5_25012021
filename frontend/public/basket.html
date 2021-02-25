@@ -36,6 +36,7 @@
         
         <section class="basket">
             <h1>Mon panier</h1>
+            <a aria-role="button" id="cleanBasketBtn">Vider mon panier</a>
             <div id="summary">
             </div>
             <div id="total">
@@ -96,19 +97,11 @@
     </footer>
 
     <script src="./js/main.js"></script>
+    <script src="./js/Cameras.js"></script>
+    <script src="./js/Basket.js"></script>
+    <script src="./js/Order.js"></script>
     <script>
         setLayoutBasket();
-
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('blur', function (e) {
-                if(this.value != "") {
-                    this.classList.add('active');
-                }
-                else {
-                    this.classList.remove('active');
-                }
-            });
-        })
     </script>
 
 </body>
