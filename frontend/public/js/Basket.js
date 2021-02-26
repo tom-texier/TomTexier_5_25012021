@@ -142,7 +142,6 @@ removeItemToCart = (e) => {
         index = e.target.parentElement.getAttribute('data-index');
     }
 
-
     shoppingCart.splice(index, 1);
     localStorage.setItem("basket", JSON.stringify(shoppingCart));
 
