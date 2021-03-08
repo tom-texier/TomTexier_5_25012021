@@ -1,15 +1,35 @@
-# Projet 5 - Construisez un site e-commerce
+# Projet 5 - Construisez un site e-commerce - Frontend
 
-## Objectifs du projet :
+Voici le frontend du Projet 5 du parcours Développeur Web.
 
-Réaliser le frontend d'un site e-commerce et communiquer avec une API.
+### Conditions préalables
 
-Pour découvrir mon travail : 
+Vous devrez avoir `npm` installé localement sur votre machine.
 
-1. Cloner le repository 
+### Installation de `Sass` (seulement si vous souhaitez modifier le style)
+
+1. Changer de dossier > *`frontend`*
 
 ```
-git clone https://github.com/tom-texier/TomTexier_5_25012021.git
+cd frontend
 ```
 
-2. Suivre les étapes des fichiers *README.md* présents dans les répertoires *backend* et *frontend*
+2. Depuis le dossier *`frontend`*, exécutez la commande suivante :
+```
+npm install
+```
+
+### Exécution de `Sass`
+
+1. Depuis le dossier *`frontend`*, exécutez la commande suivante :
+
+```
+npm run sass
+```
+
+2. La console doit afficher :
+```
+Sass is watching for changes. Press Ctrl-C to stop.
+```
+
+3. Vous pouvez maintenant modifier les fichiers du dossier `./frontend/sass`.

@@ -1,12 +1,12 @@
-# Orinoco #
+# Projet 5 - Construisez un site e-commerce - Backend
 
 Voici le backend du Projet 5 du parcours Développeur Web.
 
-### Conditions préalables ###
+### Conditions préalables
 
 Vous devrez avoir `Node.js` et `npm` installés localement sur votre machine.
 
-### Installation ###
+### Installation
 
 1. Depuis le dossier *backend*, exécutez la commande suivante :
 ```
