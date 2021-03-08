@@ -23,5 +23,5 @@ npm install
 Listening on port 3000
 Successfully connected to MongoDB Atlas !
 ```
-(Le serveur doit fonctionner sur `localhost` avec le port par défaut `3000`.
-Si le serveur fonctionne sur un autre port, le numéro du port sera inscrit dans la console. Ex. `Listening on port 3001`)
+*Le serveur doit fonctionner sur `localhost` avec le port par défaut `3000`.
+Si le serveur fonctionne sur un autre port, le numéro du port sera inscrit dans la console. Ex. `Listening on port 3001`*

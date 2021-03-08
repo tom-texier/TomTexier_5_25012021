@@ -19,7 +19,7 @@ cd frontend
 npm install
 ```
 
-### Exécution de `Sass`
+### Exécution de `Sass` (seulement si vous souhaitez modifier le style)
 
 1. Depuis le dossier *`frontend`*, exécutez la commande suivante :
 
